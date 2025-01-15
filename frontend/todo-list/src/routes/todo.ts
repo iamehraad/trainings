@@ -1,7 +1,9 @@
 import {Request, Response, Router} from "express";
 
-const router = Router()
+const todoRouter = Router()
 
-router.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!")
+todoRouter.get("/", (req: Request, res: Response) => {
+    res.send("Hello World2!")
 })
+
+export default todoRouter
