@@ -1,10 +1,13 @@
 import express from "express";
 import todoRouter from "./routes/todo";
+import {connectToDatabase} from "./db/database";
 
 const app = express();
 const port = 8080;
 
+// DB
 
+connectToDatabase().then(() => console.log("Connected to DB"));
 // Plugins
 app.use(express.json());
 
