@@ -1,5 +1,5 @@
 import {Pool} from 'pg';
-import {dbConfig} from "./db_configuration";
+import {dbConfig} from "../secrets/db_configuration";
 
 // Database connection details
 const client = new Pool(dbConfig);
