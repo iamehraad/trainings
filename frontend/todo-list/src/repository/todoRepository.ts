@@ -12,5 +12,18 @@ export async function createTodoItem(todoDto: TodoDto) {
         return response.rows[0].id;
     } catch (e) {
         console.log(e);
+        throw e
+    }
+}
+
+export async function getTodoItems() {
+    try {
+        const response = await client.query(
+            `SELECT * FROM todo_list`
+        )
+        return response.rows;
+    } catch (e) {
+        console.log(e);
+        throw e
     }
 }
