@@ -1,21 +1,18 @@
-import {Pool} from 'pg';
+import {Client} from 'pg';
 import {dbConfig} from "../secrets/db_configuration";
 
-// Database connection details
-const client = new Pool(dbConfig);
+const client = new Client(dbConfig);
 
 export async function connectToDatabase() {
     try {
         await client.connect();
         console.log('Connected to PostgreSQL!');
 
-        const res = await client.query('SELECT * FROM pg_user');
-        console.log('Server time:', res.rows[0]);
+        const res = await client.query('SELECT * FROM todo_list');
+        console.log('Server time:', res.rows);
 
     } catch (err) {
         console.error('Connection error', err);
-    } finally {
-        await client.end();
     }
 }
 
