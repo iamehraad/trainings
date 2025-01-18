@@ -1,4 +1,4 @@
-import {ErrorRequestHandler, NextFunction, Request, Response, Router} from "express";
+import {NextFunction, Request, Response, Router} from "express";
 import {createTodoItem, getTodoItems} from "../repository/todoRepository";
 import {TodoDto} from "../dto/todo.dto";
 import {handlePostgresError} from "../db/database";

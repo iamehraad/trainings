@@ -22,7 +22,6 @@ export async function getTodoItems(): Promise<TodoDto[]> {
         )
         return response.rows;
     } catch (e) {
-        console.log(e);
         throw e
     }
 }
