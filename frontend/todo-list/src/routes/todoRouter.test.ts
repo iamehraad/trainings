@@ -1,5 +1,5 @@
 import {describe, expect, vi, it, beforeEach} from "vitest";
-import {getTodoItems} from "../repository/todoRepository";
+import {createTodoItem, getTodoItems} from "../repository/todoRepository";
 import todoRouter from "./todoRouter";
 import request from 'supertest';
 import express, {Express} from "express";
@@ -13,15 +13,20 @@ const mockedTodos = [
 describe("Router functions", () => {
     let app: Express;
     beforeEach(() => {
-        vi.mocked(getTodoItems).mockResolvedValue(mockedTodos);
-
         // Create a new Express application for each test
         app = express();
         app.use(express.json());
         app.use('/todo', todoRouter);
     });
     it("should call get and returns mocked values", async () => {
+        vi.mocked(getTodoItems).mockResolvedValue(mockedTodos);
         const response = await request(app).get("/todo").expect(200)
         expect(response.body).toEqual(mockedTodos)
+    })
+
+    it("should call post and returns an ID", async () => {
+        vi.mocked(createTodoItem).mockResolvedValue(1);
+        const response = await request(app).post("/todo/create").send(mockedTodos[0]).expect(200)
+        expect(response.body).toEqual({id: 1})
     })
 })
