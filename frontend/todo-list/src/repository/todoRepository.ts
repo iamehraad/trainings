@@ -2,7 +2,6 @@ import {TodoDto} from "../dto/todo.dto";
 import client from "../db/database";
 
 export async function createTodoItem(todoDto: TodoDto) {
-    console.log("todoDto", todoDto);
     try {
         const response = await client.query(
             `INSERT INTO todo_list(task,description, is_finished)
@@ -16,7 +15,7 @@ export async function createTodoItem(todoDto: TodoDto) {
     }
 }
 
-export async function getTodoItems() {
+export async function getTodoItems(): Promise<TodoDto[]> {
     try {
         const response = await client.query(
             `SELECT * FROM todo_list`
