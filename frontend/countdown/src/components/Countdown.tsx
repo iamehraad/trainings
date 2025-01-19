@@ -17,18 +17,19 @@ const Countdown = () => {
                         <div className={"flex gap-4 items-center"}>
                             <input type="number" max={24}
                                    onChange={(e) => handleInputChange(TimerType.HOURS, e.target.value)}
-                                   className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
+                                   className="block min-w-0 grow py-3 pl-3 pr-3 text-xl text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
                                    placeholder="Hours"/>
                             <input type="number" max={60}
                                    onChange={(e) => handleInputChange(TimerType.MINUTES, e.target.value)}
-                                   className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
+                                   className="block min-w-0 grow py-3 pl-3 pr-3 text-xl text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
                                    placeholder="Minutes"/>
                             <input type="number" max={60}
                                    onChange={(e) => handleInputChange(TimerType.SECONDS, e.target.value)}
-                                   className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
+                                   className="block min-w-0 grow py-3 pl-3 pr-3 text-xl text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 rounded-xl"
                                    placeholder="Seconds"/>
                         </div>
-                        <button type={"submit"} className={"mt-10 text-white rounded-xl bg-blue-500 p-2 w-40"}>Start!
+                        <button type={"submit"} className={"mt-10 text-white rounded-xl bg-blue-500 p-2 w-40 text-xl"}>
+                            Start!
                         </button>
                     </form>
 
