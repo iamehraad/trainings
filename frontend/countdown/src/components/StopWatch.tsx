@@ -1,9 +1,9 @@
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 
 const StopWatch = () => {
-    const [startTime, setStartTime] = useState(null);
-    const [now, setNow] = useState(null);
-    const intervalRef = useRef(null);
+    const [startTime, setStartTime] = useState<number | null>(null);
+    const [now, setNow] = useState<number | null>(null);
+    const intervalRef = useRef<any>(null);
 
     function handleStart() {
         setStartTime(Date.now());
