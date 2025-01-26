@@ -1,5 +1,6 @@
 package com.training.microservice.bank.loans.audit;
 
+
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

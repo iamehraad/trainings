@@ -1,26 +1,19 @@
 package com.training.microservice.bank.loans.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Loans extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long loanId;
-
-    private String loanNumber;
+    private Long loanId;
 
     private String mobileNumber;
+
+    private String loanNumber;
 
     private String loanType;
 
@@ -29,4 +22,5 @@ public class Loans extends BaseEntity {
     private int amountPaid;
 
     private int outstandingAmount;
+
 }
