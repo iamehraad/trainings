@@ -12,5 +12,4 @@ public class AuditAwareImpl implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
         return Optional.of("Accounts_MS");
     }
-
 }
