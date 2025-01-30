@@ -5,8 +5,11 @@ Training project for Java and microservices
 
 2 - `docker inspect image ${imageId}`
 
-3 - `docker ps `
+3 - `docker ps`
 
+
+## Build packs
+ - Generates docker image file with best practices
 
 ## Steps for docker:
 
