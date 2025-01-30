@@ -8,9 +8,6 @@ Training project for Java and microservices
 3 - `docker ps`
 
 
-## Build packs
- - Generates docker image file with best practices
-
 ## Steps for docker:
 
 1 - Make Dockerfile
