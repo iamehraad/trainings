@@ -7,6 +7,8 @@ Training project for Java and microservices
 
 3 - `docker ps`
 
+4 - `docker pull ${username}/${image}`
+
 
 ## Steps for docker:
 
