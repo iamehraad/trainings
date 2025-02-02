@@ -1,19 +1,28 @@
 spring:
-    application:
-        name: accounts
-    datasource:
-        url: jdbc:h2:mem:testdb
-        driverClassName: org.h2.Driver
-        username: admin
-        password: 'admin'
-    h2:
-        console:
-            enabled: true
-    jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        hibernate:
-            ddl-auto: update
-        show-sql: true
+  application:
+    name: accounts
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: 'admin'
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 build:
-    version: "1.0"
+  version: "1.0"
+
+accounts:
+  message: "Welcome to this simple sample app"
+  contactDetails:
+    name: "Mehrad"
+    email: "mehrad@fakeemail.com"
+  onCallSupport:
+    - (123) 123-123123
+    - (321) 321-312321

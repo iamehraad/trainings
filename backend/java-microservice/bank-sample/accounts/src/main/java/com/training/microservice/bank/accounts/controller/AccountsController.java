@@ -2,6 +2,7 @@ package com.training.microservice.bank.accounts.controller;
 
 
 import com.training.microservice.bank.accounts.constants.AccountsConstants;
+import com.training.microservice.bank.accounts.dto.AccountsContactInfoDto;
 import com.training.microservice.bank.accounts.dto.CustomerDto;
 import com.training.microservice.bank.accounts.dto.ResponseDto;
 import com.training.microservice.bank.accounts.service.IAccountsService;
@@ -40,6 +41,9 @@ public class AccountsController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Create account for customer"
@@ -104,6 +108,14 @@ public class AccountsController {
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get contact info"
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(accountsContactInfoDto);
     }
 
 }
