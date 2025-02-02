@@ -9,6 +9,10 @@ Training project for Java and microservices
 
 4 - `docker pull ${username}/${image}`
 
+5 - `dcoker compose up -d`
+
+6 - `docker compose down / docker compose stop`
+
 
 ## Steps for docker:
 
