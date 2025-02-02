@@ -1,6 +1,13 @@
 Training project for Java and microservices
 
 ## Useful docker commands:
+
+-------
+
+[Usefull commands for docker](https://www.udemy.com/course/master-microservices-with-spring-docker-kubernetes/learn/lecture/39944012#overview)
+
+-------
+
 1 - `docker images` -> show all images
 
 2 - `docker inspect image ${imageId}`
@@ -9,9 +16,16 @@ Training project for Java and microservices
 
 4 - `docker pull ${username}/${image}`
 
+
+Create containers:
+
 5 - `dcoker compose up -d`
 
 6 - `docker compose down / docker compose stop`
+
+Start command from already created containers:
+
+7 - `docker compose start`
 
 
 ## Steps for docker:
