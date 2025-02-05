@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to this simple sample app QA"
+  contactDetails:
+    name: "Mehrad QA"
+    email: "mehrad@fakeemail.com"
+  onCallSupport:
+    - (123) 123-123123
+    - (321) 321-312321
