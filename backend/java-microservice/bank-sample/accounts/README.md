@@ -36,11 +36,15 @@ Start command from already created containers:
 
 3 - `docker run -d -p 8080:8080 iamehraad/accounts:0.1`
 
+For docker compose:
+We should enable readiness and liveness of application (configServer) via application.yml file
+
+
 ## For config management:
 
 We can use spring cloud
 
  - Expose refresh API via actuator
  - use spring-bus
- - use rabbitMQ as broker to automatically call refresh endpoint
+ - use rabbitMQ as broker to automatically call refresh endpoint with default docker command
  - Add rabbit config to application.yml of each microservice
