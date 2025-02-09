@@ -5,7 +5,7 @@ accounts:
   message: "Welcome to this simple sample app PROD"
   contactDetails:
     name: "Mehrad PROD"
-    email: "mehrad@fakeemail.com"
+    email: "{cipher}9d79ff99d2aff513b1c2aae7f193523ec7f9432abec9548719a31d28a187c90afd3309ead40feb5f4e3dffa7dcec3df7"
   onCallSupport:
     - (123) 123-123123
     - (321) 321-312321

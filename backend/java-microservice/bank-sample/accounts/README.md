@@ -35,3 +35,11 @@ Start command from already created containers:
 2 - build it with: `docker build . -t iamehraad/accounts:0.1`
 
 3 - `docker run -d -p 8080:8080 iamehraad/accounts:0.1`
+
+## For config management:
+
+We can use spring cloud
+
+ - Expose refresh API via actuator
+ - use rabbitMQ as broker to automatically call refresh endpoint
+ - Add rabbit config to application.yml of each microservice
