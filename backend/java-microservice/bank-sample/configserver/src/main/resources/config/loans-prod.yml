@@ -4,13 +4,13 @@ spring:
       on-profile: "prod"
 
 build:
-  version: "1.0"
+  version: "2.0"
 
-accounts:
-  message: "Welcome to this simple sample app PROD"
+loans:
+  message: "Hi"
   contactDetails:
     name: "Mehrad PROD"
     email: "mehrad@fakeemail.com"
   onCallSupport:
-    - (123) 123-123123
-    - (321) 321-312321
+    - (310) 875-4367
+    - (201) 236-1267

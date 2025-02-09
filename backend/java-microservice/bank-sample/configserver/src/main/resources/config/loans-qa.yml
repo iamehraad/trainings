@@ -1,15 +1,15 @@
 spring:
   config:
     activate:
-      on-profile: "prod"
+      on-profile: "qa"
 
 build:
   version: "2.0"
 
-cards:
+loans:
   message: "Hi"
   contactDetails:
-    name: "Mehrad PROD"
+    name: "Mehrad QA"
     email: "mehrad@fakeemail.com"
   onCallSupport:
     - (310) 875-4367
