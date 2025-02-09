@@ -41,5 +41,6 @@ Start command from already created containers:
 We can use spring cloud
 
  - Expose refresh API via actuator
+ - use spring-bus
  - use rabbitMQ as broker to automatically call refresh endpoint
  - Add rabbit config to application.yml of each microservice
