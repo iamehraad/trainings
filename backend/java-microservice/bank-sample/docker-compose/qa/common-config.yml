@@ -20,4 +20,4 @@ services:
         condition: service_completed_successfully
     environment:
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
-      SPRING_PROFILE_ACTIVE: default
+      SPRING_PROFILE_ACTIVE: qa
