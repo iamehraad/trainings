@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to this simple sample app DEV"
+  contactDetails:
+    name: "Mehrad"
+    email: "mehrad@fakeemail.com"
+  onCallSupport:
+    - (123) 123-123123
+    - (321) 321-312321
