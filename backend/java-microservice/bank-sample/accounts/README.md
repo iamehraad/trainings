@@ -16,6 +16,8 @@ Training project for Java and microservices
 
 4 - `docker pull ${username}/${image}`
 
+5 - create mysql image `docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql`
+
 
 Create containers:
 
