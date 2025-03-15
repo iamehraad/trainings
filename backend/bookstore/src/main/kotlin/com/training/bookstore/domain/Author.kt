@@ -1,9 +1,9 @@
 package com.training.bookstore.domain
 
 class Author (
-    var id: Long?,
-    var name: String,
-    var age: Int,
-    var description: String,
-    var image: String,
+    val id: Long?,
+    val name: String,
+    val age: Int,
+    val description: String,
+    val image: String,
 )
