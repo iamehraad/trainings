@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Table(name = "books")
 data class Book(
     @Id
-    @Column(name = "id")
+    @Column(name = "isbn")
     val isbn: String,
 
     @Column(name = "title")
