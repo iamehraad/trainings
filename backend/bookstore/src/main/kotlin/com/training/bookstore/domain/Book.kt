@@ -1,6 +1,6 @@
 package com.training.bookstore.domain
 
-class Book (
+data class Book (
     val isbn: String,
     val title: String,
     val description: String,

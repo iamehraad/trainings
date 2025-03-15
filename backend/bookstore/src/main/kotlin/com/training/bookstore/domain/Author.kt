@@ -1,6 +1,6 @@
 package com.training.bookstore.domain
 
-class Author (
+data class Author (
     val id: Long?,
     val name: String,
     val age: Int,
