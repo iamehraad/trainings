@@ -3,13 +3,14 @@ package com.training.bookstore.services.impl
 import com.training.bookstore.domain.entities.AuthorEntity
 import com.training.bookstore.repositories.AuthorRepository
 import com.training.bookstore.services.AuthorService
+import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
 class AuthorServiceImpl(private val authorRepository: AuthorRepository) : AuthorService {
 
-    override fun save(authorEntity: AuthorEntity): AuthorEntity {
+    override fun create(authorEntity: AuthorEntity): AuthorEntity {
         return authorRepository.save(authorEntity)
     }
 
@@ -19,6 +20,14 @@ class AuthorServiceImpl(private val authorRepository: AuthorRepository) : Author
 
     override fun get(id: Long): AuthorEntity? {
         return authorRepository.findByIdOrNull(id)
+    }
+
+    // Make it atomic
+    @Transactional
+    override fun fullUpdate(id: Long, authorEntity: AuthorEntity): AuthorEntity {
+       check(authorRepository.existsById(id))
+        val normalisedAuthor = authorEntity.copy(id=id)
+        return authorRepository.save(normalisedAuthor)
     }
 
 }

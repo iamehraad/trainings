@@ -16,7 +16,7 @@ class AuthorServiceImplTest @Autowired constructor (
 
     @Test
     fun `test that save persists the Author in database`() {
-        val savedAuthor = underTest.save(testAuthorEntityA())
+        val savedAuthor = underTest.create(testAuthorEntityA())
         assertThat(savedAuthor.id).isNotNull()
 
         val recalledAuthor = authorRepository.findByIdOrNull(savedAuthor.id!!)
