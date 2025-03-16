@@ -24,4 +24,13 @@ class AuthorsController(private val authorService: AuthorService) {
         return authorService.list().map { it.toAuthorDto() };
     }
 
+    @GetMapping(path = ["/{id}"])
+    fun readOneAuthor(@PathVariable("id") id: Long): ResponseEntity<AuthorDto> {
+        val foundedAuthor = authorService.get(id)?.toAuthorDto();
+        foundedAuthor?.let {
+            return ResponseEntity(it, HttpStatus.OK)
+        } ?: return ResponseEntity(HttpStatus.NOT_FOUND)
+
+    }
+
 }
