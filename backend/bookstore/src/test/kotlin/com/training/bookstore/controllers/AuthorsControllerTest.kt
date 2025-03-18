@@ -2,10 +2,12 @@ package com.training.bookstore.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
+import com.training.bookstore.domain.dto.AuthorUpdateRequestDto
 import com.training.bookstore.domain.entities.AuthorEntity
 import com.training.bookstore.services.AuthorService
 import com.training.bookstore.testAuthorDtoA
 import com.training.bookstore.testAuthorEntityA
+import com.training.bookstore.testAuthorUpdateRequestDtoA
 import io.mockk.every
 import io.mockk.verify
 import org.hamcrest.Matchers.equalTo
@@ -15,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.post
-import org.springframework.test.web.servlet.put
+import org.springframework.test.web.servlet.*
 
 
 @SpringBootTest
@@ -186,7 +185,7 @@ class AuthorsControllerTest @Autowired constructor(
     fun `test that full update Author returns 400 on illegal exception`() {
         every {
             authorService.fullUpdate(any(), any())
-        } throws(IllegalStateException())
+        } throws (IllegalStateException())
 
         mockMvc.put("$AUTHORS_BASE_URL/999") {
             contentType = MediaType.APPLICATION_JSON
@@ -194,6 +193,57 @@ class AuthorsControllerTest @Autowired constructor(
             content = objectMapper.writeValueAsString(testAuthorDtoA(999))
         }.andExpect {
             status { isBadRequest() }
+        }
+    }
+
+    @Test
+    fun `test that partial update Author returns 400 on illegal state exception`() {
+        every {
+            authorService.partialUpdate(any(), any())
+        } throws (IllegalStateException())
+
+        mockMvc.patch("$AUTHORS_BASE_URL/999") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(
+                testAuthorUpdateRequestDtoA()
+            )
+        }.andExpect {
+            status { isBadRequest() }
+        }
+    }
+
+    @Test
+    fun `test that partial update Author returns 200 and updated author`() {
+        every {
+            authorService.partialUpdate(any(), any())
+        } answers {
+            testAuthorEntityA(999)
+        }
+
+        mockMvc.patch("$AUTHORS_BASE_URL/999") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(
+                testAuthorUpdateRequestDtoA()
+            )
+        }.andExpect {
+            status { isOk() }
+            content { jsonPath("$.name", equalTo("John doe")) }
+        }
+    }
+
+    @Test
+    fun `test that delete author returns 204 successfully deleted`() {
+        every {
+            authorService.delete(any())
+        } answers {}
+
+        mockMvc.delete("$AUTHORS_BASE_URL/999") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isNoContent() }
         }
     }
 

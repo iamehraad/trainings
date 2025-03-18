@@ -1,9 +1,12 @@
 package com.training.bookstore.controllers
 
+import com.training.bookstore.domain.AuthorUpdateRequest
 import com.training.bookstore.domain.dto.AuthorDto
+import com.training.bookstore.domain.dto.AuthorUpdateRequestDto
 import com.training.bookstore.services.AuthorService
 import com.training.bookstore.toAuthorDto
 import com.training.bookstore.toAuthorEntity
+import com.training.bookstore.toAuthorUpdateRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -45,6 +48,27 @@ class AuthorsController(private val authorService: AuthorService) {
         } catch (ex: IllegalStateException) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }
+    }
+
+    @PatchMapping(path = ["/{id}"])
+    fun partialUpdate(
+        @PathVariable("id") id: Long,
+        @RequestBody authorUpdateRequest: AuthorUpdateRequestDto
+    ): ResponseEntity<AuthorDto> {
+        return try {
+            val result = authorService.partialUpdate(id, authorUpdateRequest.toAuthorUpdateRequest())
+            ResponseEntity(result.toAuthorDto(), HttpStatus.OK);
+        } catch (ex: IllegalStateException) {
+            ResponseEntity(HttpStatus.BAD_REQUEST)
+        }
+    }
+
+    @DeleteMapping(path = ["/{id}"])
+    fun deleteAuthor(
+        @PathVariable("id") id: Long
+    ): ResponseEntity<Unit> {
+        authorService.delete(id)
+        return ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }
