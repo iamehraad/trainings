@@ -182,5 +182,20 @@ class AuthorsControllerTest @Autowired constructor(
         }
     }
 
+    @Test
+    fun `test that full update Author returns 400 on illegal exception`() {
+        every {
+            authorService.fullUpdate(any(), any())
+        } throws(IllegalStateException())
+
+        mockMvc.put("$AUTHORS_BASE_URL/999") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(testAuthorDtoA(999))
+        }.andExpect {
+            status { isBadRequest() }
+        }
+    }
+
 
 }

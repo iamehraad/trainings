@@ -1,5 +1,6 @@
 package com.training.bookstore.services.impl
 
+import com.training.bookstore.domain.entities.AuthorEntity
 import com.training.bookstore.repositories.AuthorRepository
 import com.training.bookstore.testAuthorEntityA
 import org.assertj.core.api.Assertions.assertThat
@@ -10,10 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
 
 @SpringBootTest
-class AuthorServiceImplTest @Autowired constructor (
+class AuthorServiceImplTest @Autowired constructor(
     private val underTest: AuthorServiceImpl,
     private val authorRepository: AuthorRepository
 ) {
+    @Test
+    fun `test that list returns empty list when there is no author in db`() {
+        val result = underTest.list();
+        assertThat(result).isEmpty()
+    }
 
     @Test
     fun `test that save persists the Author in database`() {
@@ -30,16 +36,11 @@ class AuthorServiceImplTest @Autowired constructor (
     @Test
     fun `test that an author with an ID throws an IllegalArgumentException`() {
         assertThrows<IllegalArgumentException> {
-            val existingAuthor = testAuthorEntityA(id=999)
+            val existingAuthor = testAuthorEntityA(id = 999)
             underTest.create(existingAuthor)
         }
     }
 
-    @Test
-    fun `test that list returns empty list when there is no author in db`() {
-        val result = underTest.list();
-        assertThat(result).isEmpty()
-    }
 
     @Test
     fun `test that list returns authors when there is authors in db`() {
@@ -61,6 +62,25 @@ class AuthorServiceImplTest @Autowired constructor (
         val result = underTest.get(savedAuthor.id!!);
         assertThat(result).isNotNull()
         assertThat(result).isEqualTo(savedAuthor)
+    }
+
+    @Test
+    fun `Test that full update, successfuly updates author in DB`() {
+        val exisingAuthor = authorRepository.save(testAuthorEntityA())
+        val exisingAuthorId = exisingAuthor.id!!
+        val updatedAuthor = AuthorEntity(
+            id = exisingAuthorId,
+            name = "Don joe",
+            age=60,
+            description="Something randome",
+            image="random.png"
+        )
+        val result = underTest.fullUpdate(exisingAuthorId, updatedAuthor)
+        assertThat(result).isEqualTo(updatedAuthor)
+
+        val retrievedAuthor = authorRepository.findByIdOrNull(exisingAuthorId)
+        assertThat(retrievedAuthor).isNotNull()
+        assertThat(retrievedAuthor).isEqualTo(updatedAuthor)
     }
 
 }
