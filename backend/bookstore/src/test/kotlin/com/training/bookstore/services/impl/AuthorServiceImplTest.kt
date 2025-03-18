@@ -4,6 +4,7 @@ import com.training.bookstore.repositories.AuthorRepository
 import com.training.bookstore.testAuthorEntityA
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
@@ -24,6 +25,14 @@ class AuthorServiceImplTest @Autowired constructor (
         assertThat(recalledAuthor!!).isEqualTo(
             testAuthorEntityA(id = savedAuthor.id)
         )
+    }
+
+    @Test
+    fun `test that an author with an ID throws an IllegalArgumentException`() {
+        assertThrows<IllegalArgumentException> {
+            val existingAuthor = testAuthorEntityA(id=999)
+            underTest.create(existingAuthor)
+        }
     }
 
     @Test
