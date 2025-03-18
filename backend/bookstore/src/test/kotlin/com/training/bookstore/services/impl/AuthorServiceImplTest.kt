@@ -15,14 +15,9 @@ class AuthorServiceImplTest @Autowired constructor(
     private val underTest: AuthorServiceImpl,
     private val authorRepository: AuthorRepository
 ) {
-    @Test
-    fun `test that list returns empty list when there is no author in db`() {
-        val result = underTest.list();
-        assertThat(result).isEmpty()
-    }
 
     @Test
-    fun `test that save persists the Author in database`() {
+    fun `test that save persists the Author in the database`() {
         val savedAuthor = underTest.create(testAuthorEntityA())
         assertThat(savedAuthor.id).isNotNull()
 
@@ -34,54 +29,58 @@ class AuthorServiceImplTest @Autowired constructor(
     }
 
     @Test
-    fun `test that an author with an ID throws an IllegalArgumentException`() {
+    fun `test that an Author with an ID throws an IllegalArgumentException`() {
         assertThrows<IllegalArgumentException> {
             val existingAuthor = testAuthorEntityA(id = 999)
             underTest.create(existingAuthor)
         }
     }
 
+    @Test
+    fun `test that list returns empty list when no authors in the database`() {
+        val result = underTest.list()
+        assertThat(result).isEmpty()
+    }
 
     @Test
-    fun `test that list returns authors when there is authors in db`() {
+    fun `test that list returns authors when authors present in the database`() {
         val savedAuthor = authorRepository.save(testAuthorEntityA())
-        val expected = listOf(savedAuthor);
-        val result = underTest.list();
+        val expected = listOf(savedAuthor)
+        val result = underTest.list()
         assertThat(result).isEqualTo(expected)
     }
 
     @Test
-    fun `test that get returns null when author is not in db`() {
-        val result = underTest.get(999);
+    fun `test that get returns null when author not present in the database`() {
+        val result = underTest.get(999)
         assertThat(result).isNull()
     }
 
     @Test
-    fun `test that get returns author when author is in db`() {
+    fun `test that get returns author when author is present in the database`() {
         val savedAuthor = authorRepository.save(testAuthorEntityA())
-        val result = underTest.get(savedAuthor.id!!);
-        assertThat(result).isNotNull()
+        val result = underTest.get(savedAuthor.id!!)
         assertThat(result).isEqualTo(savedAuthor)
     }
 
     @Test
-    fun `Test that full update, successfully updates author in DB`() {
-        val exisingAuthor = authorRepository.save(testAuthorEntityA())
-        val exisingAuthorId = exisingAuthor.id!!
-        val updatedAuthor = testAuthorEntityB(exisingAuthorId)
-        val result = underTest.fullUpdate(exisingAuthorId, updatedAuthor)
+    fun `test that full update successfully updates the author in the database`() {
+        val existingAuthor = authorRepository.save(testAuthorEntityA())
+        val existingAuthorId = existingAuthor.id!!
+        val updatedAuthor = testAuthorEntityB(id = existingAuthorId)
+        val result = underTest.fullUpdate(existingAuthorId, updatedAuthor)
         assertThat(result).isEqualTo(updatedAuthor)
 
-        val retrievedAuthor = authorRepository.findByIdOrNull(exisingAuthorId)
+        val retrievedAuthor = authorRepository.findByIdOrNull(existingAuthorId)
         assertThat(retrievedAuthor).isNotNull()
         assertThat(retrievedAuthor).isEqualTo(updatedAuthor)
     }
 
     @Test
-    fun `test that full update author throws IllegalStateException`() {
+    fun `test that full update Author throws IllegalStateException when Author does not exist in the database`() {
         assertThrows<IllegalStateException> {
-            val nonExistingAuthorId = 1234L
-            val updatedAuthor = testAuthorEntityB(nonExistingAuthorId)
+            val nonExistingAuthorId = 999L
+            val updatedAuthor = testAuthorEntityB(id = nonExistingAuthorId)
             underTest.fullUpdate(nonExistingAuthorId, updatedAuthor)
         }
     }
